@@ -1,0 +1,6 @@
+{
+  "mongoURL": "mongodb+srv://gefije6078:ZyAHpmnqJlScdErB@cluster0.pmdtq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  "clientID": "1238368899062431744",
+  "secret": "8iKuVyBtXKUEV9NQNtJ9W9B-EQkpqpQ-",
+  "callbackURL": "http://localhost:3000/callback"
+}
