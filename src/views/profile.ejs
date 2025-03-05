@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profil</title>
+    <meta
+      property="og:image"
+      content="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"
+    />
+    <!--<title>parsher.com.tr</title>-->
+    <link
+      rel="icon"
+      href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://api.vibescripts.com.tr/discord/profile-card/assets/css/style.css"
+    />
+
+    <!-- Font Awsome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+    
+      .profile-section,
+      .codes-section {
+        background-color: #2d2d2d;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden; /* Added to prevent overflow */
+      }
+    
+      .profile-section .card {
+        margin: 0;
+      }
+    
+      .codes-section .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    
+      @media (min-width: 768px) {
+        .codes-section .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    
+      @media (min-width: 1024px) {
+        .codes-section .grid {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
+    
+      .card-style {
+        background-color: #3d3d3d;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .badge-custom {
+      background-color: #4e58c5d3;
+      color: rgba(255, 255, 255, 0.732);
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    
+      .card-profile-body {
+        margin-top: 0;
+      }
+    
+      .username {
+        color: #fff;
+        font-size: 1.9rem;
+      }
+    
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    
+  </head>
+  <body class="bg-zinc-900">
+    <%- include('partials/_header'); -%>
+    <%- include('partials/_loader'); -%>
+    <div class="mb-auto container">
+      <!-- Profile Section -->
+
+        <div class="codes-section text-white">
+          <div class="card-header">
+            <div style="background: url('<%= profileUser.banner || 'https://vibescripts.com.tr/public/image-upload/uploads/ce635d34b201c51d483ab24716762934.png' %>');" class="banner-img"></div>
+          </div>
+          <div class="card-body" style="margin-bottom: 5rem;">
+            <div class="profile-header">
+              <div class="profil-logo">
+                <img src="<%= member.user.avatarURL({ dynamic: true }) %>" />
+              </div>
+            </div>
+            <div class="profile-body">
+              <div class="username"><%= member.user.username %></div>
+              <hr />
+              <div class="basic-infos">
+                <div class="category-title">Hakkımda</div>
+                <p><%= profileUser.about || 'Bu kişi hakkımda kısmını doldurmamış' %></p>
+              </div>
+              <div class="roles">
+                <div class="category-title">Roles</div>
+                <div class="roles-list">
+                  <div class="role">
+                    <div class="role-color" style="background: orange"></div>
+                    <%= auth %>
+                  </div>
+                </div>
+              </div>
+              <div class="basic-infos">
+                <div class="category-title">İSTATİSTİK</div>
+                <p>・Paylaşılan Kod Sayısı: <%= data ? data.length : 0 %></p>
+                <p>・Paylaşılan Repository Sayısı: <%= userRepo ? userRepo.length : 0 %></p>
+                <p>・Yorum Sayısı : <%= totalComments %> </p>
+                <p>・Discord Profili : <a href="https://discord.com/users/<%= member.user.id %>">Profil Linki</a></p>
+                <p>・Hesap oluşturulma tarihi: <%= new Date(member.user.createdAt).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+              </div>
+              <div class="social-media">
+                <div class="category-title">Sosyal Medya</div>
+
+                <% if (profileUser.social) { %>
+                  <% if (profileUser.social.personal) { %>
+                    <p>
+                      <a href="<%= profileUser.social.personal %>" target="_blank" style="color: #fff; font-size: 14;">
+                        <i class="fa-solid fa-user"></i> Kişisel Websitem
+                      </a>
+                    </p>
+                  <% } %>
+                  <% if (profileUser.social.youtube) { %>
+                    <p>
+                      <a href="<%= profileUser.social.youtube %>" target="_blank" style="color: #fff; font-size: 14;">
+                        <i class="fab fa-youtube"></i> YouTube
+                      </a>
+                    </p>
+                  <% } %>
+                  <% if (profileUser.social.twitter) { %>
+                    <p>
+                      <a href="<%= profileUser.social.twitter %>" target="_blank" style="color: #fff; font-size: 14;">
+                        <i class="fab fa-twitter"></i> Twitter
+                      </a>
+                    </p>
+                  <% } %>
+                  <% if (profileUser.social.instagram) { %>
+                    <p>
+                      <a href="<%= profileUser.social.instagram %>" target="_blank" style="color: #fff; font-size: 14;">
+                        <i class="fab fa-instagram"></i> Instagram
+                      </a>
+                    </p>
+                  <% } %>
+                  <% if (profileUser.social.github) { %>
+                    <p>
+                      <a href="<%= profileUser.social.github %>" target="_blank" style="color: #fff; font-size: 14;">
+                        <i class="fab fa-github"></i> GitHub
+                      </a>
+                    </p>
+                  <% } %>
+                <% } else { %>
+                  <p style="color: #a5a5a5ea; font-style: normal; font-size: 14px;">
+                    Sosyal medya hesabı belirtilmemiş
+                  </p>
+                <% } %>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+
+      <!-- Codes Section -->
+      <div class="codes-section profile-section">
+        <h3 class="text-2xl text-white text-center font-bold mb-4">Paylaştığı kodlar (<%= data ? data.length : 0 %> kod & <%= userRepo ? userRepo.length : 0 %> repository)</h3>
+        <br />
+
+        <div class="grid">
+          <% if (data) { %>
+            <% for(let i = 0; i < data.length; i++) { %>
+              <div class="card-style">
+                <span class="badge-custom">kod</span>
+                <div class="card-profile-body">
+                  <h3 class="text-white text-center font-bold"><%= data[i].name %></h3>
+                  <p class="text-white text-center"><%= data[i].desc %></p>
+                  <div class="text-center">
+                    <a href="/forum/<%= data[i].rank %>/<%= data[i].id %>" class="btn btn-primary">Detaylar</a>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+          <% } else { %>
+            <p class="text-white text-center">Henüz hiç kod paylaşmamış</p>
+          <% } %>
+
+          <% if(userRepo) { %>
+            <% for(let i = 0; i < userRepo.length; i++) { %>
+              <div class="card-style card-profile-body">
+                <span class="badge-custom">repo</span>
+                <h3 class="text-white text-center font-bold"><%= userRepo[i].name %></h3>
+                <p class="text-white text-center"><%= userRepo[i].description %></p>
+                <div class="text-center">
+                  <a href="/repository/<%= userRepo[i].name %>" class="btn btn-primary">Detaylar</a>
+                </div>
+              </div>
+              <% } %>
+          <% } %>
+
+        
+      </div>
+      
+    </div>
+    <%- include('partials/_upbtn'); -%>
+
+    <script>
+      if (localStorage.getItem("mode") != "") {
+        document.body.classList.add(localStorage.getItem("mode"));
+        document.getElementById("mode-btn").checked = true;
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

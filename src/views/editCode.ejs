@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kodu Düzenle</title>
+    <link rel="icon" href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"/>
+    <style>
+      body {
+        background-color: #1e1e1e;
+        color: #dcdcdc;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+      }
+      .bg-gray-800 {
+        background-color: #2d2d2d;
+      }
+      .rounded-lg {
+        border-radius: 10px;
+      }
+      .shadow-md {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .p-8 {
+        padding: 2rem;
+      }
+      .text-white {
+        color: #fff;
+      }
+      .mb-4 {
+        margin-bottom: 1rem;
+      }
+      .text-xl {
+        font-size: 1.25rem;
+      }
+      .font-bold {
+        font-weight: bold;
+      }
+      .bg-red-500 {
+        background-color: #ef4444;
+      }
+      .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .py-2 {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+      .rounded-md {
+        border-radius: 0.375rem;
+      }
+      .block {
+        display: block;
+      }
+      .w-full {
+        width: 100%;
+      }
+      .bg-inputs{
+        background-color: #374151;
+        color: #cfcfcf !important;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('partials/_header', { reqMember: reqMember }); -%>
+
+    <main class="container mx-auto py-8">
+      <div class="bg-gray-800 rounded-lg shadow-md p-8 mx-auto w-full">
+        <h2 class="text-xl text-white font-bold mb-4">Kodu Düzenle</h2>
+        <form action="/edit/<%= code.id %>" method="POST">
+          <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+
+          <div class="mb-4">
+            <label class="block text-white font-bold mb-2" for="name">Başlık</label>
+            <input 
+            class="shadow appearance-none bg-inputs rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            id="name" 
+            type="text" 
+            name="name" 
+            value="<%= code.name %>">
+          </div>
+          <div class="mb-4">
+            <label class="block text-white font-bold mb-2" for="desc">Açıklama</label>
+            <textarea 
+            class="shadow appearance-none bg-inputs rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            id="desc" 
+            name="desc" 
+            rows="4"><%= code.desc %></textarea>
+          </div>
+          <div class="mb-4">
+            <label class="block text-white font-bold mb-2" for="modules">Modüller</label>
+            <input 
+            class="shadow appearance-none bg-inputs rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            id="modules" 
+            type="text" 
+            name="modules" 
+            value="<%= code.modules %>">
+          </div>
+          <div class="mb-4">
+            <label class="block text-white font-bold mb-2" for="mainCode">Main Kodu</label>
+            <textarea 
+            class="shadow appearance-none bg-inputs rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            id="mainCode" 
+            name="mainCode" 
+            rows="10"><%= code.mainCode %></textarea>
+          </div>
+          <div class="mb-4">
+            <label class="block text-white font-bold mb-2" for="command">Komut</label>
+            <textarea 
+            class="shadow appearance-none bg-inputs rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            id="command" 
+            name="command" 
+            rows="10"><%= code.command %></textarea>
+          </div>
+          <div class="flex items-center justify-between">
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Kaydet</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <%- include('partials/_footer'); -%>
+  </body>
+</html>

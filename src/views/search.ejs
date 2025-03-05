@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #18181b;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #cc0000;
+        }
+
+        .codes-section {
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .card-style {
+            background-color: #292929;
+            padding: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-style:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/" class="back-button">Geri Dön</a>
+
+        <% if (type === "code" && codes.length > 0) { %>
+            <div class="codes-section">
+                <h3>Kodlar</h3>
+                <div class="grid">
+                    <% for (let i = 0; i < codes.length; i++) { %>
+                        <a href="/code/<%= codes[i].id %>" class="card-style">
+                            <div style="font-size: 1.25rem;"><%= codes[i].name %> 
+                                <br><br>
+                                <div style="font-size: 0.85rem;">
+                                    <%= codes[i].desc %>
+                                </div>
+                            </div>
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+        <% } else if (type === "code" && codes.length === 0) { %>
+            <div class="codes-section">
+                <h3>Kodlar</h3>
+                <p>Kod bulunamadı.</p>
+            </div>
+        <% } %>
+
+        <% if (type === "repo" && repos.length > 0) { %>
+            <div class="codes-section">
+                <h3>Repolar</h3>
+                <div class="grid">
+                    <% for (let i = 0; i < repos.length; i++) { %>
+                        <a href="/repo/<%= repos[i].id %>" class="card-style">
+                            <div style="font-size: 1.25rem;"><%= repos[i].name %> 
+                                <br><br>
+                                <div style="font-size: 0.85rem;">
+                                    <%= repos[i].desc %>
+                                </div>
+                            </div>
+                                </a>
+                            <% } %>
+                        </div>
+                    </div>
+                            <% } else if (type === "repo" && repos.length === 0) { %>
+            <div class="codes-section">
+                <h3>Repolar</h3>
+                <p>Repo bulunamadı.</p>
+            </div>
+        <% } %>
+    </div>
+</body>
+
+</html>

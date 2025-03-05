@@ -1,0 +1,49 @@
+
+
+<% if (messages.error) { %>
+    <div class="error-box" style="display:none;">
+        <%= messages.error %>
+    </div>
+<% } %>
+
+<% if (messages.success) { %>
+    <div class="success-box" style="display:none;">
+        <%= messages.success %>
+    </div>
+<% } %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const errorBox = document.querySelector('.error-box');
+        const successBox = document.querySelector('.success-box');
+
+        if (errorBox && errorBox.textContent.trim().length > 0) {
+            Swal.fire({
+                position: 'top-start',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1000,
+                title: 'Oops...',
+                text: errorBox.textContent.trim(),
+            });
+        }
+
+        if (successBox && successBox.textContent.trim().length > 0) {
+            Swal.fire({
+                position: 'top-start',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1000,
+                title: 'Başarılı!',
+                text: successBox.textContent.trim(),
+            });
+        }
+    });
+</script>
+
+<style>
+    .error-box .success-box{
+        z-index: 99999;
+    }
+
+</style>

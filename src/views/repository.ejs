@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repository</title>
+
+  <script src="https://kit.fontawesome.com/9c05de7a9b.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+
+  <%- include('partials/_header'); -%>
+  <%- include('partials/_loader'); -%>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+    .file {
+      display: flex;
+      align-items: center
+    }
+
+    .file img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #0e0e0e;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background-color: #222222;
+      color: white;
+      transition: 0.3s ease;
+    }
+
+    .language {
+      width: 20px;
+      height: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    ul::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ul::-webkit-scrollbar-track {
+      background: #1E1E1E;
+
+    }
+
+    ul::-webkit-scrollbar-thumb {
+      background: #0c0c0c;
+
+    }
+
+    /* directory lerin altına uzunlamasına çizgi */
+    .directory ul {
+      border-left: 1px solid rgb(51, 51, 51);
+    }
+
+    li {
+      cursor: pointer;
+    }
+
+
+    .file,
+    .directory {
+      padding-left: 20px;
+      padding: 5px 20px;
+      transition: 0.3s ease;
+      border-radius: 4px;
+    }
+
+
+    .file:hover {
+      background-color: #0f0f0f;
+    }
+
+
+    #ide {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    #container {
+      display: flex;
+      height: 80vh;
+    }
+
+    #container , .windows-top-menu {
+      margin: 0px 20px;
+
+    }
+
+    .infos {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 20px;
+      color: white;
+    }
+
+    h1 {
+      text-align: left;
+    }
+  </style>
+
+  <div class="infos">
+    <h1> <%= repo.name %> </h1>
+    <a href="/profile/<%= repo.userID %>"> <%= repoUserName %> </a>
+    <p> <%= repo.description.length > 0 ? repo.description : 'No description' %> </p>
+  </div>
+
+  <!-- <form action="/add-favourite-repo " method="POST">
+    <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+    <input type="hidden" name="repoID" value="<%= repo.name %>">
+    <button type="submit">Favorilere Ekle</button>
+  </form> -->
+
+  <form id="favouriteForm" action="/add-favourite-repo"  method="POST">
+    <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+    <input name="repoID" id="favouriteName" type="hidden" value="<%= repo.name %>">
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md block mt-4 w-full text-center"> 
+          <span id="favourite" style="color:#daff0b; float:right" class="<%= isFavourite === true ? 'fas fa-star' : 'far fa-star' %>">
+          </span>
+        </button>
+  </form>
+
+
+  <% if (user.id === repo.userID || reqMember.hasPermission(8)) { %>
+    <form action="/delete-repository" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>"> 
+      <input type="hidden" name="repoID" value="<%= repo.pathName %>">
+      <button type="submit">REPOYU Sil</button>
+    </form>
+<% } %>
+
+<a href="/download/<%= repo.name %>">Repository İndir</a>
+
+
+
+  <div class="windows-top-menu">
+    <div class="left">
+      <img src="/vscode.png" alt="icon" width="20" height="20">
+      <span>
+        /repository/<%= repo.name %>
+      </span>
+    </div>
+    <div class="right">
+      <i class="fa-solid fa-minus"></i>
+      <i class="fa-regular fa-square-full"></i>
+      <i class="fas fa-times"></i>
+
+    </div>
+
+  </div>
+
+  <style>
+    .windows-top-menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 20px;
+      background-color: #333;
+      color: white;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .windows-top-menu img {
+      margin-right: 10px;
+    }
+
+    .right {
+      display: flex;
+    }
+
+    .right i {
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.1s ease;
+    }
+
+    .right i:hover {
+      background-color: #444;
+    }
+  </style>
+
+
+
+  <div id="container">
+
+
+
+    <ul>
+
+      <% function renderDirectoryTree(node) { %>
+        <% if (node.type==='file' ) { %>
+          <li class="file" onclick="viewFile('<%= node.path %>')">
+            <img src="/<%= node.path.split('.').pop() %>.png" class="language">
+            <%= node.name %>
+          </li>
+          <% } else if (node.type==='directory' ) { %>
+            <li class="directory">
+              <img src="/directory.png" class="language">
+              <%= node.name %>
+                <ul>
+                  <% if (node.children && node.children.length> 0) { %>
+                    <% node.children.forEach(child=> { %>
+                      <%= renderDirectoryTree(child) %>
+                        <% }) %>
+                          <% } %>
+                </ul>
+            </li>
+            <% } %>
+              <% } %>
+
+                <% directoryTree.forEach(node=> { %>
+                  <%= renderDirectoryTree(node) %>
+                    <% }) %>
+    </ul>
+    <div id="file-list">
+      <div id="tree-root"></div>
+    </div>
+
+    <div id="ide"></div>
+
+  </div>
+
+
+  <div class="comments">
+    <h1 class="text-white">Yorumlar</h1>
+    
+    <div class="mt-4">
+      <% comments.forEach(comment => { %>
+        <div class="bg-gray-700 rounded-md p-4 mt-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <% if (guild.members.cache.get(comment.userID)) { %>
+                <img src="<%= guild.members.cache.get(comment.userID).user.displayAvatarURL({ dynamic: true }) %>" class="w-8 h-8 rounded-full mr-2" />
+                <a href="/profile/<%= comment.userID %>" class="text-white">
+                  <%= guild.members.cache.get(comment.userID).user.username %>
+                </a>
+              <% } else { %>
+                <span class="text-white">Bilinmeyen kişi</span>
+              <% } %>
+            </div>
+            <div>
+              <span class="text-gray-300"><%= new Date(comment.date).toLocaleString() %></span>
+            </div>
+          </div>
+          <p class="text-gray-200 mt-2"><%= comment.comment %></p>
+          <% if (comment.userID === user.id || reqMember.hasPermission(8)) { %>
+            <form action="/delete-comment" method="POST">
+              <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+              <input type="hidden" name="commentID" value="<%= comment._id %>">
+              <input type="hidden" name="repoID" value="<%= repo.name %>">
+              <input type="hidden" name="type" value="repository">
+              <button type="submit">Sil</button>
+            </form>
+            <% } %>
+        </div>
+      <% }); %>
+    </div>
+
+    <style>
+      .m4 {
+        margin-top: 4rem;
+      }
+
+      .bg-gray-700 {
+        background-color: #4a5568;
+      }
+
+      .text-white {
+        color: #fff;
+      }
+
+      .text-gray-300 {
+        color: #e2e8f0;
+      }
+
+      .text-gray-200 {
+        color: #edf2f7;
+      }
+
+      .rounded-md {
+        border-radius: 0.375rem;
+      }
+
+      .p-4 {
+        padding: 1rem;
+      }
+
+      .mt-4 {
+        margin-top: 1rem;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .items-center {
+        align-items: center;
+      }
+
+      .justify-between {
+        justify-content: space-between;
+      }
+
+      .mr-2 {
+        margin-right: 0.5rem;
+      }
+
+      .w-8 {
+        width: 2rem;
+      }
+
+      .h-8 {
+        height: 2rem;
+      }
+
+      .rounded-full {
+        border-radius: 9999px;
+      }
+
+      .text-white {
+        color: #fff;
+      }
+
+      .text-gray-300 {
+        color: #e2e8f0;
+      }
+
+      .mt-2 {
+        margin-top: 0.5rem;
+      }
+
+      .text-gray-200 {
+        color: #edf2f7;
+      }
+      
+    </style>
+
+
+    <% if (typeof user !== 'undefined') { %>
+
+    <form action="/comment-repository" method="POST">
+      <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+      <input type="hidden" name="repoID" value="<%= repo.name %>">
+      <textarea name="comment" placeholder="Yorumunuzu yazın"></textarea>
+      <button type="submit" class="btn btn-primary text-white">Gönder</button>
+    </form>
+
+
+    <% } else { %>
+      <p>Yorum yapabilmek için <a href="/callback">giriş</a> yapın.</p>
+      <% } %>
+
+
+  </div>
+  <%- include('partials/_messages'); -%>
+
+
+
+  <!-- Monaco Editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.29.1/min/vs/loader.min.js"></script>
+  <script>
+    let editor;
+
+    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.29.1/min/vs' } });
+    require(['vs/editor/editor.main'], function () {
+      editor = monaco.editor.create(document.getElementById('ide'), {
+        value: '',
+        language: 'javascript',
+        theme: 'vs-dark',
+        automaticLayout: true, // otomatik boyutlandırma
+        readOnly: true, // sadece okunabilir
+        wordWrap: 'on', // kelime sığdırma
+        contextmenu: false, // sağ tık menüsünü kaldırır
+        renderIndentGuides: false, // indentation çizgilerini kaldırır
+        wordBasedSuggestions: false, // kelime tabanlı önerileri kaldırır
+        scrollbar: { vertical: 'auto', horizontal: 'auto' }, // scroll barları otomatik gösterir
+        scrollBeyondLastLine: false, // son satıra kadar boşluk ekler
+        glyphMargin: false, // hata işaretlerini kaldırır
+        folding: false, // katlama özelliğini kaldırır
+      });
+    });
+
+
+    async function viewFile(filePath) {
+      const response = await fetch(`/view-file?path=${encodeURIComponent(filePath)}`)
+      const fileContent = await response.text();
+      editor.setValue(fileContent);
+    }
+
+  </script>
+</body>
+
+</html>

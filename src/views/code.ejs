@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Gönderi</title>
+  <link rel="icon" href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-tomorrow.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .bg-gray-800 {
+      background-color: #2d2d2d;
+    }
+
+    .rounded-lg {
+      border-radius: 10px;
+    }
+
+    .shadow-md {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .p-8 {
+      padding: 2rem;
+    }
+
+    .w-150 {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .text-white {
+      color: #fff;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .font-bold {
+      font-weight: bold;
+    }
+
+    .text-gray-300 {
+      color: #dcdcdc;
+    }
+
+    .bg-gray-700 {
+      background-color: #3d3d3d;
+    }
+
+    .px-2 {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .py-1 {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .rounded-md {
+      border-radius: 0.375rem;
+    }
+
+    .float-right {
+      float: right;
+    }
+
+    .ml-4 {
+      margin-left: 1rem;
+    }
+
+    .mt-8 {
+      margin-top: 2rem;
+    }
+
+    .overflow-auto {
+      overflow: auto;
+    }
+
+    .text-red-500 {
+      color: #ef4444;
+    }
+
+    .block {
+      display: block;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .bg-red-500 {
+      background-color: #ef4444;
+    }
+
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .py-2 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .block {
+      display: block;
+    }
+
+    .w-full {
+      width: 100%;
+    }
+
+    .copy-msg {
+      display: none;
+      color: green;
+      font-size: 0.9rem;
+      margin-left: 10px;
+    }
+
+    .prism-code {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      padding: 1em;
+      border-radius: 10px;
+      overflow: auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .button-group-left {
+      display: flex;
+      gap: 10px;
+    }
+
+    .button-group-right {
+      display: flex;
+      gap: 10px;
+    }
+
+    .button-group button {
+      background-color: #3b82f6;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button-group button span {
+      margin-left: 5px;
+    }
+
+    .button-group button i {
+      margin-right: 5px;
+    }
+
+    .button-group button:hover {
+      background-color: #2563eb;
+    }
+
+    .text-green-500 {
+      color: #33ff0b;
+    }
+
+    .text-red-500 {
+      color: #ff3333;
+    }
+
+    .text-yellow-500 {
+      color: #e7ff0b;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('partials/_header'); -%>
+    <%- include('partials/_loader'); -%>
+    <%- include('partials/_messages'); -%>
+      <main class="container mx-auto py-8">
+        <div class="bg-gray-800 rounded-lg shadow-md p-8 mx-auto w-150">
+          <div class="flex items-center justify-center mb-4">
+            <% if (data.sharer) { %>
+              <a href="/profile/<%= data.sharer %>" class="flex items-center text-white mr-4">
+                <% const sharer = guild.members.cache.get(data.sharer); %>
+                <% if (sharer) { %>
+                  <img src="<%= sharer.user.displayAvatarURL({ dynamic: true }) %>" class="w-8 h-8 rounded-full mr-2" />
+                  <%= sharer.user.username %>
+                <% } else { %>
+                  Paylaşan kişi bilinmiyor
+                <% } %>
+              </a>
+            <% } %>
+                      </div>
+          <h2 class="text-xl text-white font-bold mb-4">
+            Başlık : <%= data.name %>
+          </h2>
+          <p class="text-gray-300 mb-4">Açıklama : <%= data.desc %>
+          </p>
+          <p class="mb-4 text-gray-300">
+            Modüller:
+            <span class="bg-gray-700 px-2 py-1 rounded-md">
+              <%= data.modules %>
+            </span>
+          </p>
+
+          <% if (!data.bug) { %>
+            <a href="/bug/<%= data.id %>" class="text-red-500 float-right ml-4">
+              <i class="fas fa-exclamation-triangle"></i>
+            </a>
+            <% } else { %>
+              <p class="text-red-500">
+                <strong>Dikkat:</strong> Bu kodda hata bildirimi yapılmıştır!
+                Yetkililerimiz en kısa sürede ilgilenecektir.
+              </p>
+              <% } %>
+
+              <!-- LİKE DİSSLİKE ve FAVORİTE -->
+
+              <div class="button-group">
+                <div class="button-group-left">
+                  <form id="likeForm" action="/like" method="POST">
+                    <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+                    <input name="id" type="hidden" value="<%= data.id %>">
+                    <input name="rank" type="hidden" value="<%= data.rank %>">
+                    <button type="submit" class="like-button">
+                      <i id="like" class="<%= totalLikes.includes(user.id) ? 'fas fa-thumbs-up text-green-500' : 'far fa-thumbs-up' %>"></i>
+                      <span id="likeText"><%= totalLikes.length %></span>
+                    </button>
+                  </form>
+
+                  <form id="dislikeForm" action="/dislike" method="POST">
+                    <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+                    <input name="id" type="hidden" value="<%= data.id %>">
+                    <input name="rank" type="hidden" value="<%= data.rank %>">
+                    <button type="submit" class="dislike-button">
+                      <i id="dislike" class="<%= totalDislikes.includes(user.id) ? 'fas fa-thumbs-down text-red-500' : 'far fa-thumbs-down' %>"></i>
+                      <span id="dislikeText"><%= totalDislikes.length %></span>
+                    </button>
+                  </form>
+                </div>
+
+                <div class="button-group-right">
+                  <form id="favouriteForm" action="/favourite" method="POST">
+                    <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+                    <input name="codeID" id="favouriteName" type="hidden" value="<%= data.id %>">
+                    <input name="rank" id="favouriteName" type="hidden" value="<%= data.rank %>">
+                    <button type="submit" class="favourite-button">
+                      <i id="favourite" class="<%= favourites === true ? 'fas fa-star text-yellow-500' : 'far fa-star' %>"></i>
+                      <span id="favouriteText"><%= favourites.length %></span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+              
+                <% if (data.mainCode) { %>
+                  <h2 class="text-xl text-white font-bold mt-8">
+                    Main Kodu:
+                    <a onclick="copyCode('kaynak', 'mainCopyMsg')"><i class="far fa-copy" id="mainIcon"></i></a>
+                    <span id="mainCopyMsg" class="copy-msg"></span>
+                  </h2>
+                  <pre class="prism-code" id="kaynak"><code class="language-js"><%= data.mainCode %></code></pre>
+                  <% } %>
+                    <% if (data.command) { %>
+                      <h2 class="text-xl text-white font-bold mt-8">
+                        Komut:
+                        <a onclick="copyCode('command', 'commandCopyMsg')"><i class="far fa-copy"
+                            id="commandIcon"></i></a>
+                        <span id="commandCopyMsg" class="copy-msg"></span>
+                      </h2>
+                      <pre class="prism-code" id="command"><code class="language-js"><%= data.command %></code></pre>
+                      <br>
+                      <% } %>
+                        <% if (data.sharer.includes(user.id) || reqMember.hasPermission(8)) { %>
+                          <form action="/delete-code" method="POST">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <input type="hidden" name="codeID" value="<%= data.id %>">
+                            <button type="submit" class="bg-red-500 text-white  px-4 py-2 rounded-md block mt-4 w-full rounded-lg hover:bg-red-700">
+                              Sil
+                            </button>
+                          </form>
+    
+                          <a href="/edit/<%= data.id %>"
+                            class="bg-red-500 text-white px-4 py-2 rounded-md block mt-4 w-full text-center">
+                            Kodu düzenle
+                          </a>
+                          <% } %>
+
+
+
+                            <!--  Yorum yapma alanı -->
+                            <div class="mt-8 w-full max-w-4xl">
+                              <h2 class="text-xl text-white font-bold">Yorumlar</h2>
+                              <form action="/comment" method="POST" class="mt-4">
+                                <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+                                <input type="hidden" name="codeID" value="<%= data.id %>">
+                                <textarea name="comment" class="bg-gray-700 text-white w-full rounded-md p-2" rows="4" placeholder="Yorumunuzu buraya yazın"></textarea>
+                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md block mt-4 w-full text-center">Yorum yap</button>
+                              </form>
+                      
+                              <div class="mt-4">
+                                <% comments.forEach(comment => { %>
+                                  <div class="bg-gray-700 rounded-md p-4 mt-4">
+                                    <div class="flex items-center justify-between">
+                                      <div class="flex items-center">
+                                        <% if (guild.members.cache.get(comment.userID)) { %>
+                                          <img src="<%= guild.members.cache.get(comment.userID).user.displayAvatarURL({ dynamic: true }) %>" class="w-8 h-8 rounded-full mr-2" />
+                                          <a href="/profile/<%= comment.userID %>" class="text-white">
+                                            <%= guild.members.cache.get(comment.userID).user.username %>
+                                          </a>
+                                        <% } else { %>
+                                          <span class="text-white">Bilinmeyen kişi</span>
+                                        <% } %>
+                                      </div>
+                                      <div>
+                                        <span class="text-gray-300"><%= new Date(comment.date).toLocaleString() %></span>
+                                      </div>
+                                    </div>
+                                    <p class="text-gray-200 mt-2"><%= comment.comment %></p>
+                                    <% if (comment.userID === user.id || reqMember.hasPermission(8)) { %>
+                                    <form action="/delete-comment" method="POST">
+                                      <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+                                      <input type="hidden" name="commentID" value="<%= comment._id %>">
+                                      <input type="hidden" name="rank" value="<%= data.rank %>">
+                                      <input type="hidden" name="type" value="code">
+                                      <input type="hidden" name="codeID" value="<%= data.id %>">
+                                      <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md block mt-4 w-full text-center">Yorumu sil</button>
+                                    </form>
+                                    <% } %>
+                                  </div>
+                                <% }); %>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+        </div>
+      </main>
+
+      <script>
+        const copyCode = (elementId, msgId) => {
+          const codeElement = document.getElementById(elementId);
+          const copyMsg = document.getElementById(msgId);
+
+          const tempTextArea = document.createElement("textarea");
+          tempTextArea.value = codeElement.innerText;
+          document.body.appendChild(tempTextArea);
+          tempTextArea.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempTextArea);
+
+          copyMsg.style.display = "inline";
+          copyMsg.textContent = "Kod kopyalandı";
+          setTimeout(() => {
+            copyMsg.style.display = "none";
+          }, 2000);
+        };
+      </script>
+
+      <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+      <script>
+        if (localStorage.getItem("mode") != "") {
+          document.body.classList.add(localStorage.getItem("mode"));
+          document.getElementById("mode-btn").checked = true;
+        }
+
+        const copy = (icon) => {
+          const btn = document.getElementById(icon);
+          btn.style.color = "green";
+          setTimeout(() => (btn.style.color = "#b8b8b8"), 1000);
+          icon = icon.replace("Icon", "");
+          kopyala(icon);
+        };
+
+        function kopyala(elemanID) {
+          var cop = document.createElement("div");
+          cop.setAttribute("contentEditable", true);
+          cop.innerHTML = document.getElementById(elemanID).innerHTML;
+          cop.setAttribute(
+            "onfocus",
+            "document.execCommand('selectAll',false,null)"
+          );
+          document.body.appendChild(cop);
+          cop.focus();
+          document.execCommand("copy");
+          document.body.removeChild(cop);
+        }
+      </script>
+      <%- include('partials/_upbtn'); -%>
+        <%- include('partials/_footer'); -%>
+</body>
+
+</html>

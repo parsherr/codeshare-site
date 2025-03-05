@@ -1,0 +1,590 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:site_name" content="parsher.com.tr" />
+<meta
+  property="og:description"
+  content="parsher.com.tr, Discord geliştiricilerinin ve meraklılarının bir araya gelip kodlarını ve projelerini herhangi bir ücret istemeksizin paylaştığı bir kod paylaşım sitesidir."
+/>
+<meta
+  name="description"
+  content="parsher.com.tr, Discord geliştiricilerinin ve meraklılarının bir araya gelip kodlarını ve projelerini herhangi bir ücret istemeksizin paylaştığı bir kod paylaşım sitesidir."
+/>
+<meta
+  property="og:image"
+  content="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"
+/>
+<!--<title>parsher.com.tr</title>-->
+<link
+  rel="icon"
+  href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"
+  type="image/x-icon"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Quicksand"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../ckeditor/ckeditor.js"></script>
+
+<body class="bg-zinc-900">
+  <nav class="nav-css bg-zinc-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <!-- ALTTAKİ RİNG DEĞERİNİ KAÇ YAPARSAN BORDER O OLUR -->
+            <a href="/">
+              <img
+                class="ring-0 ring-gray-300 dark:ring-gray-500 h-8 w-8 rounded-full"
+                src="https://i.pinimg.com/736x/3a/e8/ca/3ae8cafdfe542130f3c9e972a06253d7.jpg"
+                alt="Logo"
+              />
+            </a>
+          </div>
+          <a
+            href="/"
+            class="navbar-mobile-css-display-none text-gray-100 hover:text-white px-4 py-3 rounded-md text-sm font-medium"
+            >Parsher Code</a
+          >
+
+          <div class="mobile-navbar-css">
+            <div
+              class="parshermenu-btn text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2 text-center"
+              onclick="toggleMenu()"
+            >
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>
+            <div class="parshermenu" id="parshermenu">
+              <a
+                href="/"
+                class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >Anasayfa</a
+              >
+              <a
+              href="/forum"
+              class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+              >İçerikler</a
+            >
+              <a
+                href="/yetkililer"
+                class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >Yetkililerimiz</a
+              >
+              <a
+                href="/faq"
+                class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >S.S.S.</a
+              >
+              <a
+                href="/discord"
+                class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >Discord</a
+              >
+
+              <!-- Dropdown Menu for Kodlar -->
+              <div class="relative">
+                <div
+                  id="dropdown"
+                  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                >
+                  <ul
+                    class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownDefaultButton"
+                  >
+                    <li>
+                      <a
+                        href="/kodlar"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >Kodlar</a
+                      >
+                    </li>
+
+                    <li>
+                      <a
+                        href="/booster"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >Booster Özel</a
+                      >
+                    </li>
+                    <!--
+                    <li>
+                      <a
+                        href="/diamond"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >Elmas Kodlar</a
+                      >
+                    </li>
+                    -->
+                    <li>
+                      <a
+                        href="/altyapilar"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >Altyapılar</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="/sizlerden"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >Sizden Gelenler</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- End of Dropdown Menu for Kodlar -->
+            </div>
+          </div>
+          <script>
+            // Define toggleMenu function in the global scope
+            function toggleMenu() {
+              var menu = document.getElementById("parshermenu");
+              menu.style.display =
+                menu.style.display === "block" ? "none" : "block";
+              var menuBtn = document.querySelector(".parshermenu-btn");
+              menuBtn.classList.toggle("open");
+            }
+          </script>
+
+          <div class="navbar-mobile-css-display-none md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a
+                href="/"
+                class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >Anasayfa</a
+              >
+              <a
+              href="/forum"
+              class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+              >İçerikler</a
+            >
+              <a
+                href="/yetkililer"
+                class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >Yetkililerimiz</a
+              >
+
+              <a
+                href="/faq"
+                class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >S.S.S.</a
+              >
+
+              <a
+                href="/discord"
+                class="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >Discord</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="md:block">
+          <div class="ml-4 flex items-center md:ml-6">
+            <% if (!user) { %>
+
+            <a href="/callback">
+              <button
+                onclick='href="/callback"'
+                type="button"
+                class="login-button-css text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2 text-center"
+              >
+                Giriş Yap
+              </button>
+            </a>
+            <% } else { %>
+
+            <button
+              id="accountDropdown"
+              data-dropdown-toggle="accountsDropdown"
+              class="profile-dropdown-button-css bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              type="button"
+            >
+              Merhaba, <%= user.username %> 👋
+              <svg
+                class="w-4 h-4 ml-2"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div
+              id="accountsDropdown"
+              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+            >
+              <ul
+                class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="accountDropdown"
+              >
+                <li>
+                  <a
+                    href="/profile/<%=user.id%>"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Profil</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    href="/profile/edit"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Profili Düzenle</a
+                  >
+                </li>
+
+                <% if (reqMember && reqMember.hasPermission(8)) { %>
+                <li>
+                  <a
+                    href="/admin"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Admin Panel</a
+                  >
+                </li>
+                <%}%>
+
+                <li>
+                  <a
+                    href="/share"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Kod Paylaş</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    href="/share-repository"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Repository Paylaş</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    href="/my-repository"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >My Repository</a
+                  >
+                </li>
+
+                <li>
+                  <a href="/my-favourites" 
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Favorilerim</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    href="/logout"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Çıkış Yap</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <%}%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    @media (max-width: 768px) {
+      .navbar-mobile-css-display-none {
+        display: none;
+      }
+
+      .login-button-css {
+        margin: 0 40px;
+      }
+    }
+
+    .footer-css .ul-css li a {
+      transition: 0.4s ease-in-out;
+    }
+
+    .footer-css .ul-css li a:hover {
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .owner-card-css {
+      border: none;
+      width: 100%;
+      transition: 0.4s ease-in-out;
+    }
+
+    .owner-card-css:hover {
+      box-shadow: 2px 5px 50px 10px;
+      cursor: pointer;
+      transform: translateY(-5px);
+    }
+
+    .scrollup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 1000;
+      display: none;
+      cursor: pointer;
+    }
+
+    .scrollup.show {
+      display: block;
+    }
+
+
+    .owner-card-css img {
+      margin: 10px;
+      transition: 0.4s ease;
+    }
+
+    .owner-card-css img:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+
+    .search-css,
+    .share-input-css {
+      transition: 0.4s ease-in-out;
+    }
+
+    .search-css:focus,
+    .share-input-css:focus {
+      outline: none;
+    }
+
+    .share-input-css {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .code-css .box-1 {
+      transform: translateY(-10px);
+      margin: 0 10px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgb(99 99 99 / var(--tw-bg-opacity));
+      border-radius: 2px;
+    }
+
+    .parshermenu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+      width: 100%;
+      height: 100%;
+      padding-top: 60px;
+      text-align: center;
+      z-index: 1000;
+      transition: 0.4s ease-in-out;
+      text-align: center;
+      align-items: center;
+    }
+
+    .parshermenu a {
+      display: block;
+      color: #fff;
+      padding: 15px;
+      transition: background-color 0.3s;
+      transform: translateY(-20px);
+      font-size: 20px;
+    }
+
+    .parshermenu.open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .parshermenu-btn {
+      position: fixed;
+      top: 70px;
+      right: 0;
+      cursor: pointer;
+      z-index: 1001;
+      border: 1px solid rgba(128, 128, 128, 0.322);
+      padding: 5px 10px;
+      border-radius: 10px 0px 0px 10px;
+    }
+
+    .parshermenu-btn .bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 5px auto;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .parshermenu-btn.open .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .parshermenu-btn.open .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .parshermenu-btn.open .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .span-css {
+      background-color: #0d57b8c7;
+      padding-left: 3px;
+      padding-right: 4px;
+      border-radius: 8px;
+    }
+    .span-css:hover {
+      background-color: #5fa3fcec;
+    }
+    .dipnot {
+      font-size: 1.1rem;
+      color: #acacac;
+    }
+    .boosterinfobutton {
+      display: flex;
+      align-items: center; /* Dikeyde ortalama */
+      justify-content: center; /* Yatayda ortalama */
+    }
+
+    .scrollup {
+      width: 40px;
+      height: 40px;
+      position: fixed;
+      bottom: 60px;
+      right: 50px;
+      display: none;
+      text-indent: -9999px;
+      background-color: rgb(30 64 175 / var(--tw-bg-opacity));
+      color: white;
+      border-radius: 100%;
+      text-align: center;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      transition: 0.4s ease-in-out;
+      z-index: 999;
+    }
+
+    .scrollup:hover {
+      opacity: 0.7;
+      transform: translateY(-5px);
+    }
+  </style>
+
+  <script>
+    $(document).ready(function () {
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+          $(".scrollup").fadeIn();
+        } else {
+          $(".scrollup").fadeOut();
+        }
+      });
+
+      $(".scrollup").click(function () {
+        $("html, body").animate(
+          {
+            scrollTop: 0,
+          },
+          600
+        );
+
+        return false;
+      });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    function checkCookie() {
+      // Belirli bir çerez var mı kontrol et
+      if (document.cookie.indexOf("cookieConsent=true") == -1) {
+        // Çerez bildirimini göster
+        Swal.fire({
+          position: "bottom-start",
+          title: "Çerez Kullanımı",
+          text: "Bu web sitesi çerezleri kullanır. Web sitemizi kullanarak çerez kullanımını kabul edersiniz.",
+          showCancelButton: true,
+          confirmButtonText: "Kabul Et",
+          cancelButtonText: "Reddet",
+          width: "450",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Kullanıcı çerez kullanımını kabul etti
+            document.cookie = "cookieConsent=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/";
+          } else {
+            // Kullanıcı çerez kullanımını kabul etmedi
+            document.cookie = "cookieConsent=false; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/";
+          }
+        });
+      }
+    }
+  
+    window.onload = checkCookie;
+  </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const scrollUpButton = document.querySelector('.scrollup');
+
+    // Butonu başlangıçta gizli yap
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 200) {
+        scrollUpButton.classList.add('show');
+      } else {
+        scrollUpButton.classList.remove('show');
+      }
+    });
+
+    // Butona tıklandığında sayfanın en üstüne animasyonlu kaydır
+    scrollUpButton.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
+
+</body>
+
+<script src="https://pagination.js.org/dist/2.6.0/pagination.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+<script src="https://cdn.tailwindcss.com/2.2.15/tailwind.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
