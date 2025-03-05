@@ -26,4 +26,4 @@ NOT : Bu proje temel almanız için var. yani şuan ki veriyonuyla bunu direkt a
 
 ## Destek
 
-- [destek sunucumuza](https://discord.gg/bdfd).
+- [destek sunucumuza buradan katılabilirsiniz. 💖](https://discord.gg/bdfd).
