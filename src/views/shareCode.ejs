@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <title>Kod Paylaş</title>
+    <link rel="icon" href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"/>
+  </head>
+  <body>
+    <script>
+      function redirectToHomePage() {
+        // Ana sayfaya yönlendirme işlemi
+        window.location.href = "/";
+      }
+    </script>
+    
+    <%- include('partials/_header'); -%>
+    <%- include('partials/_loader'); -%>
+    <form action="/sharing" method="POST">
+      <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+      <div class="py-4">
+        <div class="w-4/5 h-4/6 mx-auto px-4">
+          <div class="rounded-lg p-6">
+            <div class="code-css">
+              <div class="box-1">
+                <h2 class="text-white">Kod Adı</h2>
+                <input
+                  name="name"
+                  type="text"
+                  class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+                  placeholder="Kod Adı"
+                  required
+                />
+
+                <h2 class="text-white">Kod Yapımcıları</h2>
+                <input
+                  name="sharer"
+                  type="text"
+                  class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+                  placeholder="Yapımcılar (Id, Id)"
+                  required
+                />
+                <p class="text-white">Kod Hakkında</p>
+                <input
+                  name="desc"
+                  type="text"
+                  class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+                  placeholder="Kod Hakkında"
+                  required
+                />
+
+                <div class="mt-4">
+                  <input
+                    name="modules"
+                    type="text"
+                    class="text-white bg-gray-700 mt-1 share-input-css focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md py-2"
+                    placeholder="Kullanılan modüller..."
+                    required
+                  />
+                </div>
+                <div class="mt-4">
+                  <label class="block text-sm font-medium text-white"
+                    >Kod Türü</label
+                  >
+                  <% if (isStaff) { %>
+                  <select
+                    name="rank"
+                    class="bg-gray-700 text-white mt-1 share-input-css focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    required
+                  >
+                    <option value="kodlar">Kodlar</option>
+                    <option value="ready">Altyapı</option>
+                    <option value="bdfd">Bdfd</option>
+                    <option value="bdfd-altyapilar">Bdfd Altyapı</option>
+                    <option value="fromyou">Sizden Gelenler</option>
+                    <option value="html">Html</option>
+                    <option value="website">Website</option>
+                  </select>
+                  <% } else { %>
+                  <select
+                    name="rank"
+                    class="bg-gray-700 text-white mt-1 share-input-css focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    required
+                  >
+                    <option value="fromyou" selected>Sizden Gelenler</option>
+                  </select>
+                  <% } %>
+                </div>
+                <div class="mt-4">
+                  <label class="block text-sm font-medium text-white"
+                    >Main Komut</label
+                  >
+                  <textarea
+                    name="mainCode"
+                    id="mainCode"
+                    class="text-white bg-gray-700 mt-1 share-input-css focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    rows="10"
+                    placeholder="Main dosyasına atılacak komut (eğer yoksa 'yok' yaz)"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mt-4">
+                  <label class="block text-sm font-medium text-white"
+                    >Komutlar Dosyası</label
+                  >
+                  <textarea
+                    name="command"
+                    class="text-white bg-gray-700 mt-1 share-input-css focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    rows="10"
+                    placeholder="Komut dosyasına atılacak komut (eğer yoksa 'yok' yaz)"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mt-6">
+                  <button
+                    type="submit"
+                    class="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800"
+                  >
+                    Paylaş
+                  </button>
+                  <button
+                  type="reset"
+                  class="bg-yellow-700 text-white px-4 py-2 rounded-md hover:bg-yellow-800"
+                
+                >
+                  Sıfırla
+                </button>
+                <button
+                type="button"
+                onclick="redirectToHomePage()"
+                class="bg-red-700 text-white px-4 py-2 rounded-md hover:bg-red-800"
+                
+                >
+                  Geri dön
+                </button>
+              </div>
+                </div>
+                <div class="mt-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <%- include('partials/_upbtn'); -%>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+      if (localStorage.getItem("mode") != "") {
+        document.body.classList.add(localStorage.getItem("mode"));
+        document.getElementById("mode-btn").checked = true;
+      }
+
+      jQuery(function ($) {
+        var $inputs = $("textarea[name=mainCode],textarea[name=command]");
+        $inputs.on("input", function () {
+          $inputs.not(this).prop("required", !$(this).val().length);
+        });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

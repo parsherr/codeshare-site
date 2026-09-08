@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <%- include('partials/_header'); -%>
+  <%- include('partials/_loader'); -%>
+
+
+
+  <div class="container">
+    <div class="row">
+      <% for (let i = 0; i < repos.length; i++) { %>
+        <div class="col-md-4">
+          <div class="repo-box" onclick="location.href='/repository/<%= repos[i].name %>';">
+            <%= repos[i].name %>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+
+  <style>
+    .repo-box {
+      background-color: #3d3d3d;
+      border-radius: 10px;
+      margin: 10px;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .repo-box:hover {
+      background-color: #505050;
+    }
+  </style>
+
+  
+</body>
+</html>

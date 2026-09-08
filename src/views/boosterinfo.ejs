@@ -1,0 +1,199 @@
+<html>
+    <head>
+      <title>Yetkililerimiz</title>
+      <link rel="icon" href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"/>
+      <meta
+      property="og:image"
+      content="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"
+    />
+    <!--<title>parsher.com.tr</title>-->
+    <link
+      rel="icon"
+      href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"
+      type="image/x-icon"
+    />
+<style>
+
+$bg: #fff;
+$text: #7288a2;
+$gray: #4d5974;
+$lightgray: #e5e5e5;
+$blue: #03b5d2;
+
+body {
+margin: 0;
+padding: 0;
+font-family: 'Hind', sans-serif;
+background: $bg;
+color: $gray;
+display: flex;
+min-height: 100vh;
+}
+
+.container {
+margin: 0 auto;
+color: #fff;
+text-align: center;
+font-size: 1.35rem;
+padding: 4rem;
+width: 48rem;
+}
+.accordion {
+.accordion-item {
+  border: 1px solid #707070;
+  padding-left: 15px;
+  margin-bottom: 10px;
+  padding-right: 15px;
+  border-radius: 15px;
+  border-bottom: 1px solid $lightgray;
+  button[aria-expanded='true'] {
+    border-bottom: 1px solid $blue;
+  }
+}
+button {
+  position: relative;
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 1em 0;
+  color: #fff;
+  color: $text;
+  font-size: 1.15rem;
+  font-weight: 400;
+  border: none;
+  background: none;
+  outline: none;
+  &:hover, &:focus {
+    cursor: pointer;
+    color: $blue;
+    &::after {
+      cursor: pointer;
+      color: $blue;
+      border: 1px solid $blue;
+    }
+  }
+  .accordion-title {
+    padding: 1em 1.5em 1em 0;
+  }
+  .icon {
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    right: 0;
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    border: 1px solid;
+    border-radius: 22px;
+    &::before {
+      display: block;
+      position: absolute;
+      content: '';
+      top: 9px;
+      left: 5px;
+      width: 10px;
+      color: #fff;
+      height: 2px;
+      background: currentColor;
+    }
+    &::after {
+      display: block;
+      position: absolute;
+      content: '';
+      top: 5px;
+      color: #fff;
+      left: 9px;
+      width: 2px;
+      height: 10px;
+      background: currentColor;
+    }
+  }
+}
+button[aria-expanded='true'] {
+  color: $blue;
+  .icon {
+    &::after {
+      width: 0;
+    }
+  }
+  + .accordion-content {
+    opacity: 1;
+    
+    color: #fff;
+    max-height: 9em;
+    transition: all 200ms linear;
+    will-change: opacity, max-height;
+  }
+}
+.accordion-content {
+  opacity: 0;
+  color: #fff;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms linear, max-height 200ms linear;
+  will-change: opacity, max-height;
+  p {
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 2em 0;
+  }
+}
+}
+    </style>
+</head>
+<body class="bg-zinc-900">
+  <%- include('partials/_header'); -%>
+  <%- include('partials/_loader'); -%>
+  <br>
+<div class="container">
+    <h1 style="font-size: 1.75rem;">Booster Bilgi </h1><br>
+    <h2>Sadece Discord sunucumuzda  <span class="span-css"><a href="https://discord.gg/bdfd">@booster</a></span> rolüne sahip olan üyelerin erişebildiği katagorilerdir.</h2>
+  <br>
+  <h1 style="font-size: 1.55rem;">Boost hakkında bilgi </h1><br>
+  <h2>Discord nitro üyeleri 2 adet <span style="border-bottom: 2px solid #fff;">boost</span>'a sahip olurlar ve eğer bunların bir tanesini bizim sunucumuza basarsanız <span class="span-css"><a href="https://discord.gg/bdfd">@booster</a></span> rolüne sahip olursunuz. <br>
+  Boost bastığınız takdirde websitemizde paylaştığımız özel içeriklere erişim sağlar ve <span class="span-css"><a href="https://discord.com/channels/1085293868976709652/1110645540670156960">#✨・booster・avantaj</a></span> Kanalındaki diğer tüm avantajlara sahip olursunuz.</h2>
+ 
+  <div class="boosterinfobutton flex mt-4 space-x-3 md:mt-6">
+    <a
+    href="/icerikler"
+    class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+    >Geri Dön</a
+  >
+  <!--
+    <div class="accordion">
+      <div class="accordion-item">
+        <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">Why is the moon sometimes out during the day?</span><span class="icon" aria-hidden="true"></span></button>
+        <div class="accordion-content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button id="accordion-button-2" aria-expanded="false"><span class="accordion-title">Why is the sky blue?</span><span class="icon" aria-hidden="true"></span></button>
+        <div class="accordion-content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  -->
+  <script>const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+      const itemToggle = this.getAttribute('aria-expanded');
+      
+      for (i = 0; i < items.length; i++) {
+        items[i].setAttribute('aria-expanded', 'false');
+      }
+      
+      if (itemToggle == 'false') {
+        this.setAttribute('aria-expanded', 'true');
+      }
+    }
+    
+    items.forEach(item => item.addEventListener('click', toggleAccordion));</script>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+  </html>

@@ -1,0 +1,117 @@
+<body>
+    <%- include('partials/_header'); -%>
+    <div class="container mx-auto flex flex-col items-center justify-center">
+      <h2 class="text-2xl font-bold text-white">Profilini Düzenle</h2>
+      <form action="/profile/edit" method="POST" class="w-full max-w-lg">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <div class="mb-4">
+          <label class="block text-white text-sm font-bold mb-2" for="banner">
+            Banner URL
+          </label>
+          <input
+            class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+            id="banner"
+            type="text"
+            name="banner"
+            placeholder="banner url"
+            value="<%= data.banner %>"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-white text-sm font-bold mb-2" for="about">
+            Hakkımda
+          </label>
+          <textarea
+            class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+            id="about"
+            placeholder="hakkımda metni"
+            name="about"
+            rows="4"
+          ><%= data.about %></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block text-white text-sm font-bold mb-2" for="github">
+            Github
+          </label>
+          <input
+            class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+            id="github"
+            type="text"
+            placeholder="Hesap Linki"
+            name="github"
+            value="<%= data.social ? data.social.github : '' %>"
+          />
+      </div>
+        <div class="mb-4">
+          <label class="block text-white text-sm font-bold mb-2" for="personal">
+            Kişisel Websitem
+          </label>
+          <input
+            class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+            id="personal"
+            type="text"
+            placeholder="Kendi siteniz var ise site URL nizi girebilirsiniz."
+            name="personal"
+            value="<%= data.social ? data.social.personal : '' %>"
+          />
+      </div>
+        <div class="mb-4">
+            <label class="block text-white text-sm font-bold mb-2" for="youtube">
+              YouTube
+            </label>
+            <input
+              class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+              id="youtube"
+              type="text"
+              placeholder="Hesap Linki"
+              name="youtube"
+              value="<%= data.social ? data.social.youtube : '' %>"
+            />
+        </div>
+          
+        <div class="mb-4">
+          <label class="block text-white text-sm font-bold mb-2" for="twitter">
+            Twitter
+          </label>
+          <input
+            class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+            id="twitter"
+            type="text"
+            name="twitter"
+            placeholder="Hesap Linki"
+            value="<%= data.social ? data.social.twitter : '' %>"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-white text-sm font-bold mb-2" for="instagram">
+            Instagram
+          </label>
+          <input
+            class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+            id="instagram"
+            type="text"
+            placeholder="Hesap Linki"
+            name="instagram"
+            value="<%= data.social ? data.social.instagram : '' %>"
+          />
+        </div>
+        <div class="flex items-center justify-between mb-9">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Kaydet
+          </button>
+          <button
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="reset"
+        >
+          İptal
+        </button>
+        </div>
+      </form>
+    </div>
+    <div style="margin-top: 3rem;">
+    <%- include('partials/_footer'); -%>
+    </div>
+  </body>  

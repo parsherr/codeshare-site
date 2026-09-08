@@ -1,0 +1,68 @@
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<%- include('partials/_messages') %>
+<%- include('partials/_header'); -%>
+<%- include('partials/_loader'); -%>
+
+<form action="/upload/?_csrf=<%=csrfToken%>" method="post" enctype="multipart/form-data">
+    <!-- FOLDER .RAR FORMATINDA OLMALI -->
+    <input name="_csrf" type="hidden" value="<%= csrfToken %>"/>
+
+    <label for="repositoryFile" class="text-white" style="margin-left: 10px;">Repository Dosyası</label>
+    <input 
+    type="file" 
+    name="file" 
+    class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+    placeholder="Dosya Seçin"
+    id="repositoryFile" 
+    accept=".rar , .zip" 
+    required>
+
+    <label for="repositoryName" class="text-white" style="margin-left: 10px;">Repository Adı</label>
+    <input 
+    type="text" 
+    name="name" 
+    id="repositoryName" 
+    required 
+    class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+    placeholder="Örn: laravel-blog" 
+    pattern="[a-z0-9-]+" 
+    title="Küçük harf, rakam ve tire içerebilir."
+    >
+
+    <label for="repositoryDesc" class="text-white" style="margin-left: 10px;">Repository Açıklaması</label>
+    <textarea 
+    name="description" 
+    class="mt-2 bg-gray-700 text-white rounded-lg share-input-css"
+    placeholder="Açıklama"
+    id="repositoryDesc" 
+    required></textarea>
+
+
+    <button id="paylas" type="submit">Paylaş</button>
+</form>
+
+<style>
+    body {
+        background-color: #18181b ;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    input, textarea {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+    }
+    #paylas {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background-color: #007bff;
+        color: white;
+    }
+    #paylas:hover {
+        background-color: #0056b3;
+    }
+</style>

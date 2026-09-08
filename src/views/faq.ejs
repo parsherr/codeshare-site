@@ -1,0 +1,220 @@
+<html>
+    <head>
+      <title>Sıkça Sorulan Sorular</title>
+      <link rel="icon" href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"/>
+      <meta
+      property="og:image"
+      content="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"
+    />
+    <!--<title>parsher.com.tr</title>-->
+    <link
+      rel="icon"
+      href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"
+      type="image/x-icon"
+    />
+<style>
+
+$bg: #fff;
+$text: #7288a2;
+$gray: #4d5974;
+$lightgray: #e5e5e5;
+$blue: #03b5d2;
+
+body {
+margin: 0;
+padding: 0;
+font-family: 'Hind', sans-serif;
+background: $bg;
+color: $gray;
+display: flex;
+min-height: 100vh;
+}
+
+.container {
+margin: 0 auto;
+color: #fff;
+text-align: center;
+font-size: 1.35rem;
+padding: 4rem;
+width: 48rem;
+}
+.accordion {
+.accordion-item {
+  border: 1px solid #707070;
+  padding-left: 15px;
+  margin-bottom: 10px;
+  padding-right: 15px;
+  border-radius: 15px;
+  border-bottom: 1px solid $lightgray;
+  button[aria-expanded='true'] {
+    border-bottom: 1px solid $blue;
+  }
+}
+button {
+  position: relative;
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 1em 0;
+  color: #fff;
+  color: $text;
+  font-size: 1.15rem;
+  font-weight: 400;
+  border: none;
+  background: none;
+  outline: none;
+  &:hover, &:focus {
+    cursor: pointer;
+    color: $blue;
+    &::after {
+      cursor: pointer;
+      color: $blue;
+      border: 1px solid $blue;
+    }
+  }
+  .accordion-title {
+    padding: 1em 1.5em 1em 0;
+  }
+  .icon {
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    right: 0;
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    border: 1px solid;
+    border-radius: 22px;
+    &::before {
+      display: block;
+      position: absolute;
+      content: '';
+      top: 9px;
+      left: 5px;
+      width: 10px;
+      color: #fff;
+      height: 2px;
+      background: currentColor;
+    }
+    &::after {
+      display: block;
+      position: absolute;
+      content: '';
+      top: 5px;
+      color: #fff;
+      left: 9px;
+      width: 2px;
+      height: 10px;
+      background: currentColor;
+    }
+  }
+}
+button[aria-expanded='true'] {
+  color: $blue;
+  .icon {
+    &::after {
+      width: 0;
+    }
+  }
+  + .accordion-content {
+    opacity: 1;
+    
+    color: #fff;
+    max-height: 9em;
+    transition: all 200ms linear;
+    will-change: opacity, max-height;
+  }
+}
+.accordion-content {
+  opacity: 0;
+  color: #fff;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms linear, max-height 200ms linear;
+  will-change: opacity, max-height;
+  p {
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 2em 0;
+  }
+}
+}
+    </style>
+</head>
+<body class="bg-zinc-900">
+  <%- include('partials/_header'); -%>
+  <%- include('partials/_loader'); -%>
+  <br>
+<div class="container">
+    <h1 style="font-size: 1.75rem;">Sıkça Sorulan Sorular </h1><br>
+    <h2>dahasına <span class="span-css"><a href="https://discord.com/channels/1085293868976709652/1111200363975016559">#❓・sss</a></span> Kanalından ulaşabilirsiniz <br>
+  <span class="dipnot">(eğer üstteki kutuya basınca kanala atmıyorsa önce buraya tıklayıp sunucumuza katılın sonra tekrar tıklayın)</span></h2>
+  <br>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">Paylaştığım kodu nasıl silebilirim?</span><span class="icon" aria-hidden="true"></span></button>
+        <div class="accordion-content">
+          <p>Profiliniz üzerinden paylaştığınız kodları görüntüleyebilirsiniz, kodunuza girdikten sonra aşağada yer alan <span style="color: red;">"Kodu sil"</span> butonuna tıklamanız yeterlidir.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button id="accordion-button-2" aria-expanded="false"><span class="accordion-title">Discord sunucunuza girmek zorunda mıyız?</span><span class="icon" aria-hidden="true"></span></button>
+        <div class="accordion-content">
+          <p>Evet. Çünkü bu websitesi <span style="border-bottom: 1px solid #fff;"><a href="discord.gg/bdfd">Parsher Code</a></span> sunucusu için açılmıştır ve paylaşılan her içerik sunucumuza özeldir. <br>
+             Discord sunucumuza girdikten sonra <span class="span-css">@Abone</span> gibi roller aldıktan sonra içeriklere erişim sağlarsınız.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button id="accordion-button-3" aria-expanded="false"><span class="accordion-title">Nasıl profilimi kişiselleştirebilirim?</span><span class="icon" aria-hidden="true"></span></button>
+        <div class="accordion-content">
+          <p>Sitemizde şu anda bu tarz bir ayar bulunmamaktadır.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button id="accordion-button-4" aria-expanded="false"><span class="accordion-title">Nasıl kod paylaşabilirim?</span><span class="icon" aria-hidden="true"></span></button>
+        <div class="accordion-content">
+          <p>Giriş yaptıktan sonra sağ üstteki <span class="span-css"> Merhaba, <% if (user && user.username) { %> <%= user.username %> <% } else { %> Kullanıcı <% } %> 👋</span> butonuna tıklayıp saha sonrasında açılan kısımdan "Kod paylaş" butonuna tıklayınız.<br>
+            Eğer hesabınız yok ise öncelikle <span class="span-css">Giriş yap</span> ile giriş yapın</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button id="accordion-button-5" aria-expanded="false"><span class="accordion-title">Kodları nasıl görebilirim?</span><span class="icon" aria-hidden="true"></span></button>
+        <div class="accordion-content">
+          <p>Discord sunucumuza girdikten sonra <span class="span-css">@Abone</span> gibi roller aldıktan sonra içeriklere erişim sağlarsınız. Discord sunucumuzun davet linki : <span class="span-css"><a href="discord.gg/bdfd"> Sunucuya Katılmak için tıkla </a></span></p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button id="accordion-button-5" aria-expanded="false"><span class="accordion-title">Boost nedir?</span><span class="icon" aria-hidden="true"></span></button>
+        <div class="accordion-content">
+          <p>Detaylı bilgi için <span class="span-css"><a href="/boosterinfo">#❓・boost・bilgi</a></span> kısmına göz atabilirsiniz.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button id="accordion-button-5" aria-expanded="false"><span class="accordion-title">Boost basarsam elime ne geçer?</span><span class="icon" aria-hidden="true"></span></button>
+        <div class="accordion-content">
+          <p>Discord sunucumuzda ki <span class="span-css"><a href="https://discord.com/channels/1085293868976709652/1110645540670156960">✨・booster・avantaj</a></span> kanalına göz atabilirsiniz.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+      const itemToggle = this.getAttribute('aria-expanded');
+      
+      for (i = 0; i < items.length; i++) {
+        items[i].setAttribute('aria-expanded', 'false');
+      }
+      
+      if (itemToggle == 'false') {
+        this.setAttribute('aria-expanded', 'true');
+      }
+    }
+    
+    items.forEach(item => item.addEventListener('click', toggleAccordion));</script>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+  </html>

@@ -1,0 +1,41 @@
+{
+  "name": "code-sharing-website",
+  "version": "0.0.1",
+  "description": "pasher.com.tr",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --ignore 'repository/**/*.tmp'./app.js",
+    "dev": "nodemon --ignore 'repository/**/*.tmp' ./app.js"
+  },
+  "dependencies": {
+    "@discordjs/voice": "github:discordjs/voice",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "discord-banner": "^1.6.7",
+    "discord.js": "^12.5.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.1",
+    "fs": "^0.0.1-security",
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.13",
+    "multer": "^1.4.5-lts.1",
+    "node-unrar": "^0.1.6",
+    "node-unrar-js": "^2.0.2",
+    "passport": "^0.4.1",
+    "passport-discord": "^0.1.4",
+    "passport-github2": "^0.1.12",
+    "path": "^0.12.7",
+    "unrar": "^0.2.0",
+    "unzipper": "^0.12.1",
+    "util": "^0.12.5"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "eslint": "^7.21.0",
+    "nodemon": "^2.0.22"
+  }
+}

@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <title>Admin Panel</title>
+    <link rel="icon" href="https://i.pinimg.com/736x/c6/7c/e0/c67ce0f1ed761a07caf801be53bbb60f.jpg"/>
+    </head>
+  <body>
+    <%- include('partials/_header'); -%>
+    <%- include('partials/_loader'); -%>
+    <div class="min-h-screen bg-zinc-900 py-10 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 bg-gray-800 rounded-lg shadow-md">
+            <h4 class="text-2xl font-bold text-white">
+              Gün İçinde Paylaşılan içerik:
+              <br>
+              <%= code.filter(x => (Date.now() - x.date) <= 1000 * 60 * 60 * 24).length %>
+            </h4>
+          </div>
+          <div class="p-4 bg-gray-800 rounded-lg shadow-md">
+            <h4 class="text-2xl font-bold text-white">
+              7 gün İçinde Paylaşılan içerik:
+              <br>
+              <%= code.filter(x => (Date.now() - x.date) <= 1000 * 60 * 60 * 24 * 7).length %>
+            </h4>
+          </div>
+          <div class="p-4 bg-gray-800 rounded-lg shadow-md">
+            <h4 class="text-2xl font-bold text-white">
+              1 Ay İçinde Paylaşılan içerik:
+              <br>
+              <%= code.filter(x => (Date.now() - x.date) <= 1000 * 60 * 60 * 24 * 30).length %>
+            </h4>
+          </div>
+          <div class="p-4 bg-gray-800 rounded-lg shadow-md">
+            <h4 class="text-2xl font-bold text-white">
+              Sitede ki toplam içerik sayısı:
+              <br>
+              <%= code.length %>
+            </h4>
+          </div>
+        </div>
+
+        <div class="mt-10">
+          <% const pageSize = 5; // Sayfa başına gösterilecek içerik sayısı %>
+          <% const pageCount = Math.ceil(code.length / pageSize); %>
+          <% let pageIndex = 0; %>
+
+          <% for (let i = 0; i < pageCount; i++) { %>
+            <% const pageStart = i * pageSize; %>
+            <% const pageEnd = (i + 1) * pageSize; %>
+
+            <div class="code-block" style="display: <%= i === pageIndex ? 'block' : 'none' %>;">
+              <% for (let j = pageStart; j < pageEnd && j < code.length; j++) { %>
+                <% const x = code[j]; %>
+                <div class="bg-gray-800 text-white rounded-lg mb-4">
+                  <div class="flex items-center p-4">
+                    <div class="w-1/12 text-center">
+                      <%= j + 1 %>
+                    </div>
+                    <div class="w-3/12">
+                      <h4 class="text-lg font-bold text-white">
+                        <a href="/<%= x.rank %>/<%= x.id %>" class="hover:underline"><%= x.name %></a>
+                      </h4>
+                      <p class="text-sm text-gray-400 mt-1">
+                        <%= x.desc %>
+                      </p>
+                    </div>
+                    <div class="w-3/12">
+                      <p class="text-sm text-gray-400">
+                        Kullanılan Modüller: <%= x.modules.join(', ') %>
+                      </p>
+                    </div>
+                    <div class="w-2/12">
+                      <p class="text-sm text-gray-400">
+                        Paylaşan: <%= x.sharer %>
+                      </p>
+                    </div>
+                    <div class="w-2/12 flex justify-end">
+                      <form action="/delete-code" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" name="codeID" value="<%= x.id %>">
+                        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Sil</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+            </div>
+          <% } %>
+        </div>
+
+
+
+
+        <!-- REPOSİTORY SİLME BU KISIMDAN YAPILABİLİR ÇOK BASİT ÖRNEK /delete-repository:repoID -->
+
+        
+
+        <div class="mt-10">
+          <nav class="flex justify-center">
+            <ul class="flex space-x-4">
+              <% for (let page = 1; page <= pageCount; page++) { %>
+                <li>
+                  <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 justify-self-end page-link" onclick="changePage(<%= page - 1 %>); return false;">
+                    <%= page %>
+                  </a>
+                </li>
+              <% } %>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    
+
+    <script>
+      if (localStorage.getItem("mode") != "") {
+        document.body.classList.add(localStorage.getItem("mode"));
+        document.getElementById("mode-btn").checked = true;
+      }
+
+      function changePage(index) {
+        const pageLinks = document.querySelectorAll(".page-link");
+        pageLinks.forEach((link, i) => {
+          if (i === index) {
+            link.classList.add("bg-blue-600");
+            link.classList.remove("bg-blue-700");
+          } else {
+            link.classList.remove("bg-blue-600");
+            link.classList.add("bg-blue-700");
+          }
+        });
+
+        const codeBlocks = document.querySelectorAll(".code-block");
+        codeBlocks.forEach((block, i) => {
+          if (i === index) {
+            block.style.display = "block";
+          } else {
+            block.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

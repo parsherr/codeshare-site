@@ -1,0 +1,307 @@
+<html>
+  <head>
+    <title>Ana Sayfa</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <script
+      src="https://kit.fontawesome.com/c8e4d183c2.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+      charset="utf-8"
+    ></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+      span.dclinks {
+        color: #339adf;
+        /*   text-decoration: underline;  */
+      }
+      span.parshercomtr {
+        color: white;
+        font-size: 1.5rem;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .scroll-down {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.3);
+        color: rgba(255, 255, 255, 0.607);
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        z-index: 1000;
+        display: none; /* Başlangıçta gizli */
+      }
+
+      .show-scroll {
+        display: block; /* Görünür yap */
+      }
+
+
+    </style>
+  </head>
+
+  <%- include('partials/_header'); -%> 
+  <%- include('partials/_loader'); -%>
+  <%- include('partials/_messages'); -%>
+
+
+  <body class="bg-zinc-900">
+    <div id="root">
+      <div class="flex-1">
+        <section class="bg-white dark:bg-zinc-900">
+          <div
+            class="grid max-w-screen-xl px-8 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
+          >
+            <div class="mr-auto place-self-center lg:col-span-7">
+              <h1
+                class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"
+              >
+                Hoşgeldiniz!
+              </h1>
+
+              <form action="/search" method="get" class="flex items-center">
+                <input
+                  type="radio"
+                  name="type"
+                  value="code"
+                  id="light"
+                  class="mr-2"
+                />
+                <label for="light" class="mr-4 text-lg text-gray-700 dark:text-gray-300">Kod</label>
+                <!-- eğer kod seçilirse rank seçme kısmı gelicek  -->
+                <input
+                  type="radio"
+                  name="type"
+                  value="repo"
+                  id="dark"
+                  class="mr-2"
+                />
+                <label for="dark" class="mr-4 text-lg text-gray-700 dark:text-gray-300">Repo</label>
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Kod Ara"
+                  required
+                  class="w-full px-4 py-2 text-lg text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <button
+                  type="submit"
+                  class="px-6 py-2 ml-4 text-lg text-white bg-blue-500 dark:bg-blue-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  Ara
+                </button>
+              </form>
+              <p
+                class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
+              >
+                <br />
+                <strong><span class="parshercomtr">parsher.com.tr</span></strong
+                >, Discord geliştiricilerinin ve meraklılarının bir araya gelip
+                kodlarını ve projelerini herhangi bir ücret istemeksizin
+                paylaştığı bir kod paylaşım sitesidir.
+                <br />
+                <br />
+                Altyapılar gibi özel içeriklere erişim sağlamak için Discord
+                sunucumuzda gerekli rollere sahip olman lazım. Detaylı bilgi
+                için sunucumuza gelip bizimle iletişime geçin.
+                <br />
+                <br />
+                ・Normal kodlara erişim sağlamak için
+                <span class="dclinks"
+                  ><a href="https://discord.gg/bdfd">Discord sunucumuz</a></span
+                >a girmeniz yeterli.
+                <br />
+                <br />
+                ・Altyapılara erişim sağlamak için
+                <span class="dclinks"
+                  ><a href="https://discord.gg/bdfd">Discord sunucumuz</a></span
+                >da abone rolüne sahip olmalısınız.
+              </p>
+            </div>
+            <div class="hidden lg:flex lg:mt-0 lg:col-span-5 lg:flex">
+              <!-- ALTTAKİ RİNG DEĞERİNİ KAÇ YAPARSAN BORDER O OLUR -->
+              <!--src ksımına bunu yazarsan sunucu pfp'sini çeker <%=icon%> -->
+              <img
+                draggable="false"
+                class="mx-auto rounded-full ring-0 ring-gray-300 dark:ring-gray-500 h-48 w-48"
+                alt="logo"
+                src="https://i.pinimg.com/736x/3a/e8/ca/3ae8cafdfe542130f3c9e972a06253d7.jpg"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-zinc-900 py-6">
+      <div class="max-w-screen-xl mx-auto px-8">
+        <div class="grid grid-cols-2 gap-4 text-center text-white">
+          <div>
+            <h2 class="text-2xl font-bold">Toplam Kod Sayısı</h2>
+            <p class="text-lg" id="total-codes"><%= code.length %></p> <!-- Bu değeri dinamik yapabilirsiniz -->
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold">Aylık Kod Sayısı</h2>
+            <p class="text-lg" id="monthly-codes"><%= code.filter(x => (Date.now() - x.date) <= 1000 * 60 * 60 * 24 * 30).length %></p> <!-- Bu değeri dinamik yapabilirsiniz -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-down">
+      &#x25BC; Aşağı Kaydır &#x25BC;
+    </div>    
+
+    <style>
+      /* Sayfanın tamamını kaplayan merkezi hizalama */
+      .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Tüm ekranı kapsaması için */
+        padding: 20px;
+      }
+    
+      /* İçeriğin maksimum genişliğini belirleme */
+      .content-wrapper {
+        max-width: 1000px; /* Fazla genişlemesini önlemek için */
+        width: 100%;
+        text-align: center;
+      }
+    
+      /* Resmin hizalanmasını düzeltme */
+      .image-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+    
+      .image-container img {
+        max-width: 70%;
+        height: auto;
+      }
+    
+      /* Metin stilini düzenleme */
+      .description {
+        font-size: 1.1rem;
+        color: #ccc;
+        line-height: 1.6;
+      }
+    
+      /* Linklerin rengi */
+      .dclinks a {
+        color: #4a90e2;
+        text-decoration: none;
+        font-weight: bold;
+      }
+    </style>
+    
+    <div class="flex-center">
+      <div class="content-wrapper">
+        <section class="bg-white dark:bg-zinc-900">
+          <div class="image-container">
+            <img
+              draggable="false"
+              alt="logo"
+              src="https://parsher.xyz/desing-banner-v2.png"
+            />
+          </div>
+          <h1 class="text-4xl font-extrabold tracking-tight leading-none dark:text-white">
+            Hakkımızda
+          </h1>
+          <p class="description">
+            <br /><br />
+            ・Github Hesabım :
+            <span class="dclinks"><a href="https://github.com/parsherr">Github</a></span>
+            <br />
+            ・Youtube Hesabım :
+            <span class="dclinks"><a href="https://youtube.com/@parsher_">Youtube</a></span>
+          </p>
+        </section>
+      </div>
+    </div>
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      function checkSweetAlert() {
+        if (!getCookie("alertShown")) {
+          // Loader'ı göster
+          Swal.fire({
+            icon: "info",
+            title: "Erken Erişim",
+            text: "Web sitemiz erken erişim aşamasındadır. Eksiklikler ve hatalar olabilir. Discord sunucumuz üzerinden gözünüze çarpanları bize bildirebilirsiniz.",
+            allowOutsideClick: false, // Kullanıcı dışarı tıklamayı devre dışı bırak
+            didOpen: () => {
+              Swal.showLoading();
+            },
+          });
+
+          setTimeout(() => {
+            Swal.close();
+            // Cookie'yi ayarla
+            document.cookie =
+              "alertShown=true; expires=Thu, 01 Jan 2026 00:00:00 UTC; path=/;";
+          }, 4000); 
+        }
+      }
+
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+
+      window.onload = checkSweetAlert;
+    </script>
+
+    <script>
+      // Sayfa yüklendiğinde yüklenme ekranını gizle
+      window.addEventListener("load", function () {
+        var loadingScreen = document.querySelector(".loading-screen");
+        loadingScreen.style.display = "none";
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const scrollDownElement = document.querySelector('.scroll-down');
+
+        // Yazıyı başlangıçta göster
+        scrollDownElement.classList.add('show-scroll');
+
+        // Kullanıcı kaydırma yaptığında yazıyı gizle
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 0) {
+            scrollDownElement.classList.remove('show-scroll');
+          }
+        });
+      });
+    </script>
+
+    <%- include('partials/_upbtn'); -%> 
+    <div style="margin-top: 5rem;">
+      <%- include('partials/_footer'); -%>
+    </div>
+  </body>
+</html>

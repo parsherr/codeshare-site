@@ -1,0 +1,17 @@
+{
+    "name": "discord-yetkili-alim-botu",
+    "version": "1.0.0",
+    "description": "Discord yetkili alım botu v14 slashlı",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "author": "MSİ",
+    "license": "MIT",
+    "dependencies": {
+      "discord.js": "^14.0.0",
+      "@discordjs/rest": "^1.0.0",
+      "discord-api-types": "^0.37.1",
+      "@discordjs/builders": "^1.0.0"
+    }
+  }
